@@ -30,9 +30,11 @@ export default function SigninScreen() {
         password,
       });
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      console.log('Redirecting to:', data.isVoted ? '/done' : '/home'); // Agregar este console.log
       localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(data.isVoted ? '/done' : '/home');
+      const nextUrl = data.isVoted
+        ? `/done?userId=${data._id}`
+        : `/home?userId=${data._id}`;
+      navigate(nextUrl);
     } catch (err) {
       toast.error(getError(err));
     }

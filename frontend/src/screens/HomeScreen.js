@@ -38,8 +38,6 @@ const reducer = (state, action) => {
 };
 
 function HomeScreen() {
-  const navigate = useNavigate();
-
   const [
     {
       loading,
@@ -63,8 +61,13 @@ function HomeScreen() {
   const { candidato, userInfo } = state;
   const [isVoted] = useState(true);
 
-  const params = useParams();
-  const { id: userId } = params;
+  console.log('Valor de isVoted:', isVoted);
+
+  const navigate = useNavigate();
+
+  const userId = userInfo && userInfo._id && userInfo._id.toString().trim();
+
+  console.log('Valor de userId:', userId);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,20 +102,8 @@ function HomeScreen() {
           },
         }
       );
-      toast.success('Voto registrado correctamente');
       dispatch({ type: 'CREATE_SUCCESS' });
-
-      dispatch({ type: 'UPDATE_REQUEST' });
-      await axios.put(
-        `/api/users/ ${userId}`,
-        { isVoted },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-      dispatch({ type: 'UPDATE_SUCCESS' });
+      toast.success('Voto registrado correctamente');
 
       navigate('/gracias'); // Navegar solo si selectedDNI está definido
     } catch (err) {

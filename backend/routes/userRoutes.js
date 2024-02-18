@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import expressAsyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
-import { generateToken } from '../util.js';
+import { isAuth, generateToken, baseUrl } from '../util.js';
 
 const userRouter = express.Router();
 
@@ -35,8 +35,9 @@ userRouter.put(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
-      user.isVoted = Boolean(req.body.isVoted);
+      user.isVoted = req.body.isVoted;
       const updatedUser = await user.save();
+      res.send({ message: 'User Updated', user: updatedUser });
     } else {
       res.status(404).send({ message: 'User Not Found' });
     }
