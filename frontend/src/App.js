@@ -30,7 +30,7 @@ function App() {
           <Navbar bg="dark" variant="dark">
             <Container className="justify-content-between">
               <div>
-                <Navbar.Brand>COOP SERMUL 7 de AGOSTO</Navbar.Brand>
+                <Navbar.Brand>COOP SERMUL 7 DE AGOSTO</Navbar.Brand>
               </div>
 
               <Nav className="me-auto">
