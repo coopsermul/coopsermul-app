@@ -169,7 +169,6 @@ function HomeScreen() {
           onClick={checkoutHandler}
           disabled={selectedCandidato === null}
         >
-          <Envelope />
           Votar
         </Button>
       </div>

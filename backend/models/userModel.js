@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     dni: { type: String, required: true, unique: true },
     nombre: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String },
     password: { type: String, required: true },
     dni_candidato: { type: String },
     isAdmin: { type: Boolean, default: false, required: true },
