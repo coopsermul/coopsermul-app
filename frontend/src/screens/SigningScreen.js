@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils';
 
 export default function SigninScreen() {
+  const [countdown, setCountdown] = useState(10);
+  const [showForm, setShowForm] = useState(false); // Estado para controlar la visualización del formulario
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
@@ -41,10 +43,33 @@ export default function SigninScreen() {
   };
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000);
+
+    // Mostrar el formulario cuando termine el conteo
+    setTimeout(() => {
+      setShowForm(true);
+      clearInterval(interval); // Detener el intervalo una vez que el conteo ha terminado
+    }, countdown * 1000);
+
+    return () => clearInterval(interval);
+  }, [countdown]);
+
+  useEffect(() => {
     if (userInfo) {
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
+
+  const checkDashboard = async (e) => {
+    e.preventDefault();
+    try {
+      navigate('/dashboard'); // Navegar solo si selectedDNI está definido
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
 
   return (
     <Container className="small-container">
@@ -52,27 +77,35 @@ export default function SigninScreen() {
         <title>Iniciar Sesion</title>
       </Helmet>
       <h1 className="my-3">Iniciar Sesion</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="dni">
-          <Form.Label>DNI</Form.Label>
-          <Form.Control
-            type="dni"
-            required
-            onChange={(e) => setDni(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <div className="mb-3">
-          <Button type="submit">Iniciar Sesion</Button>
-        </div>
-      </Form>
+      {countdown > 0 && (
+        <p>Las elecciones inician en {countdown} segundos...</p>
+      )}
+      {showForm && ( // Renderizar el formulario solo cuando showForm sea true
+        <Form onSubmit={submitHandler}>
+          <Form.Group className="mb-3" controlId="dni">
+            <Form.Label>DNI</Form.Label>
+            <Form.Control
+              type="dni"
+              required
+              onChange={(e) => setDni(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <div className="mb-3 d-flex justify-content-between">
+            <Button type="submit">Iniciar Sesión</Button>
+            <Button variant="secondary" onClick={checkDashboard}>
+              Dashboard
+            </Button>
+          </div>
+        </Form>
+      )}
     </Container>
   );
 }

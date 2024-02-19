@@ -12,6 +12,7 @@ import SigninScreen from './screens/SigningScreen';
 import { Store } from './Store';
 import GraciasScreen from './screens/GraciasSecreen';
 import DoneSecreen from './screens/DoneScreen';
+import DashboardScreen from './screens/DashboardScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -61,6 +62,7 @@ function App() {
               <Route path="/home" element={<HomeScreen />} />
               <Route path="/gracias" element={<GraciasScreen />} />
               <Route path="/done" element={<DoneSecreen />} />
+              <Route path="/dashboard" element={<DashboardScreen />} />
             </Routes>
           </Container>
         </main>

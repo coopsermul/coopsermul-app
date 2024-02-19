@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import { Store } from '../Store';
+import { Envelope } from 'react-bootstrap-icons';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -168,6 +169,7 @@ function HomeScreen() {
           onClick={checkoutHandler}
           disabled={selectedCandidato === null}
         >
+          <Envelope />
           Votar
         </Button>
       </div>
