@@ -106,6 +106,15 @@ function HomeScreen() {
       dispatch({ type: 'CREATE_SUCCESS' });
       toast.success('Voto registrado correctamente');
 
+      dispatch({ type: 'UPDATE_REQUEST' });
+      await axios.put(
+        `/api/users/${userId}`,
+        { _id: userId, isVoted },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
       ctxDispatch({ type: 'USER_SIGNOUT' });
       localStorage.removeItem('userInfo');
 
