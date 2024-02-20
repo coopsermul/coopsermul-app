@@ -13,6 +13,7 @@ import { Store } from './Store';
 import GraciasScreen from './screens/GraciasSecreen';
 import DoneSecreen from './screens/DoneScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import logo from './logocoop.svg';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -28,13 +29,21 @@ function App() {
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar bg="dark" variant="dark">
+          <Navbar style={{ backgroundColor: '#DBF227', color: 'white' }}>
             <Container className="justify-content-between">
               <div>
-                <Navbar.Brand>COOP SERMUL 7 DE AGOSTO</Navbar.Brand>
+                <Navbar.Brand href="http://coopsermul7deagosto.com.pe/index.html">
+                  <img
+                    src={logo}
+                    width="150"
+                    height="80"
+                    className="d-inline-block align-top"
+                    alt="React Bootstrap logo"
+                  />
+                </Navbar.Brand>
               </div>
 
-              <Nav className="me-auto">
+              <Nav className="ms-auto">
                 {userInfo ? (
                   <NavDropdown title={userInfo.nombre} id="basic-nav-dropdown">
                     <Link

@@ -106,6 +106,9 @@ function HomeScreen() {
       dispatch({ type: 'CREATE_SUCCESS' });
       toast.success('Voto registrado correctamente');
 
+      ctxDispatch({ type: 'USER_SIGNOUT' });
+      localStorage.removeItem('userInfo');
+
       navigate('/gracias'); // Navegar solo si selectedDNI está definido
     } catch (err) {
       dispatch({ type: 'CREATE_FAIL' });
@@ -165,7 +168,7 @@ function HomeScreen() {
       </div>
       <div className="d-grid">
         <Button
-          variant="primary"
+          variant="success"
           onClick={checkoutHandler}
           disabled={selectedCandidato === null}
         >

@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils';
 
 export default function SigninScreen() {
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(0);
   const [showForm, setShowForm] = useState(false); // Estado para controlar la visualización del formulario
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -43,6 +43,13 @@ export default function SigninScreen() {
   };
 
   useEffect(() => {
+    const targetDate = new Date('2024-02-19T23:30:00'); // Fecha y hora objetivo (ejemplo)
+    const currentDate = new Date();
+    const difference = targetDate.getTime() - currentDate.getTime();
+    const secondsDifference = Math.ceil(difference / 1000);
+
+    setCountdown(secondsDifference);
+
     const interval = setInterval(() => {
       setCountdown((prevCountdown) => prevCountdown - 1);
     }, 1000);
@@ -51,10 +58,10 @@ export default function SigninScreen() {
     setTimeout(() => {
       setShowForm(true);
       clearInterval(interval); // Detener el intervalo una vez que el conteo ha terminado
-    }, countdown * 1000);
+    }, secondsDifference * 1000);
 
     return () => clearInterval(interval);
-  }, [countdown]);
+  }, []);
 
   useEffect(() => {
     if (userInfo) {
@@ -71,6 +78,16 @@ export default function SigninScreen() {
     }
   };
 
+  // Función para formatear el tiempo restante en formato HH:MM:SS
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${minutes
+      .toString()
+      .padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
+
   return (
     <Container className="small-container">
       <Helmet>
@@ -78,7 +95,7 @@ export default function SigninScreen() {
       </Helmet>
       <h1 className="my-3">Iniciar Sesion</h1>
       {countdown > 0 && (
-        <p>Las elecciones inician en {countdown} segundos...</p>
+        <p>Las elecciones inician en {formatTime(countdown)}</p>
       )}
       {showForm && ( // Renderizar el formulario solo cuando showForm sea true
         <Form onSubmit={submitHandler}>
@@ -99,8 +116,10 @@ export default function SigninScreen() {
             />
           </Form.Group>
           <div className="mb-3 d-flex justify-content-between">
-            <Button type="submit">Iniciar Sesión</Button>
-            <Button variant="secondary" onClick={checkDashboard}>
+            <Button variant="success" type="submit">
+              Iniciar Sesión
+            </Button>
+            <Button variant="success" onClick={checkDashboard}>
               Dashboard
             </Button>
           </div>
