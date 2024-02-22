@@ -43,7 +43,7 @@ export default function SigninScreen() {
   };
 
   useEffect(() => {
-    const targetDate = new Date('2024-02-19T23:30:00'); // Fecha y hora objetivo (ejemplo)
+    const targetDate = new Date('2024-02-24T08:00:00'); // Fecha y hora objetivo (ejemplo)
     const currentDate = new Date();
     const difference = targetDate.getTime() - currentDate.getTime();
     const secondsDifference = Math.ceil(difference / 1000);
@@ -89,13 +89,16 @@ export default function SigninScreen() {
   };
 
   return (
-    <Container className="small-container">
+    <Container className="small-container" class="login">
       <Helmet>
         <title>Iniciar Sesion</title>
       </Helmet>
-      <h1 className="my-3">Iniciar Sesion</h1>
+      <h1 className="my-3">En Espera...!!!</h1>
       {countdown > 0 && (
-        <p>Las elecciones inician en {formatTime(countdown)}</p>
+        <p>
+          Las elecciones de la coopsermul 7 de Agosto inician en:{' '}
+          {formatTime(countdown)}
+        </p>
       )}
       {showForm && ( // Renderizar el formulario solo cuando showForm sea true
         <Form onSubmit={submitHandler}>
@@ -118,9 +121,6 @@ export default function SigninScreen() {
           <div className="mb-3 d-flex justify-content-between">
             <Button variant="success" type="submit">
               Iniciar Sesión
-            </Button>
-            <Button variant="success" onClick={checkDashboard}>
-              Dashboard
             </Button>
           </div>
         </Form>

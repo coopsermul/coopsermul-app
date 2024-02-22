@@ -14,6 +14,7 @@ import GraciasScreen from './screens/GraciasSecreen';
 import DoneSecreen from './screens/DoneScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import logo from './logocoop.svg';
+import './App.css';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -29,16 +30,14 @@ function App() {
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar style={{ backgroundColor: '#DBF227', color: 'white' }}>
+          <Navbar bg="light" data-bs-theme="light">
             <Container className="justify-content-between">
               <div>
                 <Navbar.Brand href="http://coopsermul7deagosto.com.pe/index.html">
                   <img
                     src={logo}
-                    width="150"
-                    height="80"
-                    className="d-inline-block align-top"
-                    alt="React Bootstrap logo"
+                    className="App-logo"
+                    alt="CoopSermul 7 de Agosto"
                   />
                 </Navbar.Brand>
               </div>
