@@ -93,10 +93,10 @@ export default function SigninScreen() {
       <Helmet>
         <title>Iniciar Sesion</title>
       </Helmet>
-      <h1 className="my-3">En Espera...!!!</h1>
+      <h1 className="my-3">Proximamente..!!!</h1>
       {countdown > 0 && (
         <p>
-          Las elecciones de la coopsermul 7 de Agosto inician en:{' '}
+          Votaciones Feb.2024 coopsermul 7 de Agosto inician en:{' '}
           {formatTime(countdown)}
         </p>
       )}
