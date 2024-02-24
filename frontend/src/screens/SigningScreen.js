@@ -43,7 +43,7 @@ export default function SigninScreen() {
   };
 
   useEffect(() => {
-    const targetDate = new Date('2024-02-24T08:00:00'); // Fecha y hora objetivo (ejemplo)
+    const targetDate = new Date('2024-02-25T08:00:00'); // Fecha y hora objetivo (ejemplo)
     const currentDate = new Date();
     const difference = targetDate.getTime() - currentDate.getTime();
     const secondsDifference = Math.ceil(difference / 1000);
@@ -93,12 +93,14 @@ export default function SigninScreen() {
       <Helmet>
         <title>Iniciar Sesion</title>
       </Helmet>
-      <h1 className="my-3">Iniciar Sesion</h1>
+      <h1 className="my-3">Resultados Finales</h1>
       {countdown > 0 && (
-        <p>
-          Votaciones Feb.2024 coopsermul 7 de Agosto inician en:{' '}
-          {formatTime(countdown)}
-        </p>
+        <Button
+          variant="primary"
+          href="https://lookerstudio.google.com/s/qxdsA4SagKc"
+        >
+          Resultados
+        </Button>
       )}
       {showForm && ( // Renderizar el formulario solo cuando showForm sea true
         <Form onSubmit={submitHandler}>
