@@ -43,7 +43,7 @@ export default function SigninScreen() {
   };
 
   useEffect(() => {
-    const targetDate = new Date('2024-02-24T08:00:00'); // Fecha y hora objetivo (ejemplo)
+    const targetDate = new Date('2024-02-23T08:00:00'); // Fecha y hora objetivo (ejemplo)
     const currentDate = new Date();
     const difference = targetDate.getTime() - currentDate.getTime();
     const secondsDifference = Math.ceil(difference / 1000);
@@ -93,7 +93,7 @@ export default function SigninScreen() {
       <Helmet>
         <title>Iniciar Sesion</title>
       </Helmet>
-      <h1 className="my-3">Proximamente..!!!</h1>
+      <h1 className="my-3">Iniciar Sesion</h1>
       {countdown > 0 && (
         <p>
           Votaciones Feb.2024 coopsermul 7 de Agosto inician en:{' '}
