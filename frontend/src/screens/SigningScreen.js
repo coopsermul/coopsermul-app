@@ -43,7 +43,7 @@ export default function SigninScreen() {
   };
 
   useEffect(() => {
-    const targetDate = new Date('2024-02-23T08:00:00'); // Fecha y hora objetivo (ejemplo)
+    const targetDate = new Date('2024-02-24T08:00:00'); // Fecha y hora objetivo (ejemplo)
     const currentDate = new Date();
     const difference = targetDate.getTime() - currentDate.getTime();
     const secondsDifference = Math.ceil(difference / 1000);
